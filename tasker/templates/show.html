@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task #{{ task.id }}</title>
+</head>
+<body>
+<h1>{{ task.text }}</h1>
+<p>Created: {{ task.date_added }}</p>
+{% if task.date_completed %}
+<p>Completed: {{ task.date_completed }}</p>
+{% else %}
+<p>Not completed yet</p>
+{% endif %}
+</body>
+</html>
