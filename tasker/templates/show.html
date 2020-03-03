@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task #{{ task.id }}</title>
+    <title>{{ task.user.login }}'s task #{{ task.id }}</title>
 </head>
 <body>
 <h1>{{ task.text }}</h1>
@@ -12,5 +12,6 @@
 {% else %}
 <p>Not completed yet</p>
 {% endif %}
+<p>всего {{ task.user.task_set.count }} заданий у {{ task.user.login }}</p>
 </body>
 </html>
