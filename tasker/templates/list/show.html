@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ list.name }}{% endblock %}
+
+{% block body %}
+
+    <h1>{{ list.name }}</h1>
+    <p>Created: {{ list.date_added }}</p>
+    <ul>
+    {% for task in list.tasks.all %}
+        <li><a href="{% url 'task-show' task.id %}">{{ task.text }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
