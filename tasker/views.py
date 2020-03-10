@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.utils import timezone
+from django.views.generic import ListView
 
 from .models import Task, User
 
@@ -23,3 +23,8 @@ def done(request, task_id: int):
     task.date_completed = timezone.now()
     task.save()
     return redirect(show, task.id)
+
+
+class TaskListView(ListView):
+    model = Task
+    template_name = 'task_list.html'
