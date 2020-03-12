@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import fields as f
+from django.forms import ModelForm
 
 
 class User(models.Model):
@@ -14,6 +15,12 @@ class Task(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class TaskModelForm(ModelForm):
+    class Meta:
+        model = Task
+        fields = ['text', 'user']
 
 
 class TaskMembership(models.Model):

@@ -2,24 +2,26 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.generic import ListView
 
-from .models import Task, User
-from .forms import TaskForm
+from .models import Task, TaskModelForm
 
 
-def add(request):
+def create(request):
     if request.method == 'GET':
-        return render(request, 'form_task.html', context=dict(form=TaskForm()))
+        return render(request, 'form_task.html', context=dict(form=TaskModelForm()))
     elif request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskModelForm(request.POST)
         if form.is_valid():
-            user = User.objects.get(pk=1)
-            task = Task(user=user, text=form.cleaned_data['text'])
-            if form.cleaned_data['is_completed']:
-                task.date_completed = timezone.now()
-            task.save()
+            task = form.save()
             return redirect(show, task.id)
         else:
             return render(request, 'form_task.html', context=dict(form=form))
+
+
+def update(request, task_id: int):
+    """практическое задание за 12.03.
+    обновляет существующую модель таска
+    """
+    pass
 
 
 def show(request, task_id: int):
