@@ -3,14 +3,23 @@ from django.utils import timezone
 from django.views.generic import ListView
 
 from .models import Task, User
+from .forms import TaskForm
 
 
-def add(request, text: str):
-    login, text = text.split(' ', 1)
-    user = User.objects.get(login=login)
-    task = Task(user=user, text=text)
-    task.save()
-    return redirect(show, task.id)
+def add(request):
+    if request.method == 'GET':
+        return render(request, 'form_task.html', context=dict(form=TaskForm()))
+    elif request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            user = User.objects.get(pk=1)
+            task = Task(user=user, text=form.cleaned_data['text'])
+            if form.cleaned_data['is_completed']:
+                task.date_completed = timezone.now()
+            task.save()
+            return redirect(show, task.id)
+        else:
+            return render(request, 'form_task.html', context=dict(form=form))
 
 
 def show(request, task_id: int):
