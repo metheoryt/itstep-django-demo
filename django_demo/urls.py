@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 import django.urls as u
-
+from tasker import views_auth
 
 urlpatterns = [
     u.path('admin/', admin.site.urls),
     u.path('task/', u.include('tasker.urls')),
+    u.path('accounts/login/', views_auth.login_view),
+    u.path('accounts/logout/', views_auth.logout),
+    u.path('accounts/profile', views_auth.profile),
 ]
