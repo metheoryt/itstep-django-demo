@@ -11,5 +11,5 @@ def hello(request):
 
 def today(request):
     now = timezone.now()
-    content = _('Today is %(month)s %(day)d')  % {'month': now.strftime('%B'), 'day': now.day}
+    content = _('Today is %(month)s %(day)d') % {'month': now.strftime('%B'), 'day': now.day}
     return HttpResponse(content)

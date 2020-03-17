@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-17 18:44+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+#: .\tasker\models.py:10
+msgid "task"
+msgstr "задание"
+
+#: .\tasker\models.py:11
+msgid "tasks"
+msgstr "задания"
+
+#: .\tasker\models.py:13
+msgid "text"
+msgstr "текст"
+
+#: .\tasker\models.py:13
+msgid "what to do"
+msgstr "что сделать"
+
+#: .\tasker\templates\base.html:5
+msgid "Tasker"
+msgstr "Таскер"
+
+#: .\tasker\views_intl.py:8
+msgid "hello world!"
+msgstr "привет мир!"
+
+#: .\tasker\views_intl.py:14
+#, python-format
+msgid "Today is %(month)s %(day)d"
+msgstr "Сегодня %(day)d %(month)s"
