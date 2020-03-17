@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load i18n %}{% get_current_language as lang %}<!DOCTYPE html>
+<html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Tasker{% endblock %}</title>
+    <title>{% block title %}{% trans "Tasker" %}{% endblock %}</title>
 </head>
 <body>{% block body %}{% endblock %}</body>
 </html>

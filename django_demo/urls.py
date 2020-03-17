@@ -15,15 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 import django.urls as u
-from django.shortcuts import HttpResponse
-
-
-def index(request):
-    return HttpResponse('hello world')
 
 
 urlpatterns = [
-    u.path('', index),
     u.path('admin/', admin.site.urls),
     u.path('task/', u.include('tasker.urls')),
 ]

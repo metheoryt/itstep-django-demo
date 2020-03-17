@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, list_views
+from . import views, views_list, views_intl
 
 urlpatterns = [
     path('', views.TaskListView.as_view(), name='list'),
@@ -7,7 +7,9 @@ urlpatterns = [
     path('<int:task_id>/done', views.done, name='done'),
     path('new', views.create, name='new'),  # /task/new
     # списки тасков
-    path('list/<int:list_id>', list_views.show, name='list-show'),
-    path('list/new/<str:name>', list_views.add, name='list-new'),
-    # 'list/{int:list_id}/add/{int:task_id}' - добавление таска в список
+    path('list/<int:list_id>', views_list.show, name='list-show'),
+    path('list/new/<str:name>', views_list.add, name='list-new'),
+    # интернационализация
+    path('intl/today', views_intl.today),
+    path('intl/hello', views_intl.hello)
 ]
