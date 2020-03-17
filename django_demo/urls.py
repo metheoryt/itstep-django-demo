@@ -16,11 +16,15 @@ Including another URLconf
 from django.contrib import admin
 import django.urls as u
 from tasker import views_auth
+from django.contrib.auth import views as auth_views
+from django.conf import global_settings
+from . import views
 
 urlpatterns = [
     u.path('admin/', admin.site.urls),
     u.path('task/', u.include('tasker.urls')),
-    u.path('accounts/login/', views_auth.login_view),
-    u.path('accounts/logout/', views_auth.logout),
-    u.path('accounts/profile', views_auth.profile),
+    u.path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html')),
+    u.path('accounts/logout/', auth_views.LogoutView.as_view(template_name='logout.html')),
+    u.path('accounts/profile/', views_auth.profile),
+    u.path('now', views.now),
 ]
