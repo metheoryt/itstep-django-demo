@@ -3,6 +3,10 @@ from django.utils import timezone
 from django.views.generic import ListView
 
 from .models import Task, TaskModelForm
+import logging
+
+
+log = logging.getLogger(__name__)
 
 
 def create(request):
@@ -25,6 +29,7 @@ def update(request, task_id: int):
 
 
 def show(request, task_id: int):
+    log.info('show request')
     task = Task.objects.get(pk=task_id)
     return render(request, 'show.html', context={'task': task})
 

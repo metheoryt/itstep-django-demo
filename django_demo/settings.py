@@ -30,6 +30,60 @@ ALLOWED_HOSTS = [
 ]
 
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    #  определения фильтров
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        }
+    },
+    # определения форматтеров
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} {levelname} {process:d}-{thread:d} {module}: {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    # определения обработчиков логов (им назначаются фильтры и форматтеры)
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'formatter': 'simple'
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    # определения логгеров (им назначаются обработчики, уровень логгирования, переопределяются фильтры)
+    'loggers': {
+        'tasker': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        # умолчания
+        # 'django.server': {
+        #     'level': 'INFO',
+        #     'handlers': ['console'],
+        #     'propagate': False
+        # },
+        # 'django': {
+        #     'level': 'INFO',
+        #     'handlers': ['mail_admins', 'console']
+        # }
+    }
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
