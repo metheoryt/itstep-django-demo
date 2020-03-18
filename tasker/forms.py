@@ -2,6 +2,8 @@ from django import forms as f
 from django.forms import widgets as w
 
 
-class TaskForm(f.Form):
-    text = f.CharField(max_length=10, label='Таск', help_text='что вы хотите сделать?')
-    is_completed = f.BooleanField(required=False, label='Завершено', label_suffix='?')
+class EmailForm(f.Form):
+    subject = f.CharField(max_length=256)
+    message = f.CharField(widget=w.Textarea)
+    from_ = f.EmailField(label='from')
+    to = f.EmailField()
