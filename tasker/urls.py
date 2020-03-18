@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, views_list, views_intl
+from . import views, views_list, views_intl, rss
 
 urlpatterns = [
     path('', views.TaskListView.as_view(), name='list'),
@@ -11,5 +11,7 @@ urlpatterns = [
     path('list/new/<str:name>', views_list.add, name='list-new'),
     # интернационализация
     path('intl/today', views_intl.today),
-    path('intl/hello', views_intl.hello)
+    path('intl/hello', views_intl.hello),
+    # rss
+    path('rss', rss.TaskFeed())
 ]

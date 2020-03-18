@@ -20,6 +20,18 @@ from django.contrib.auth import views as auth_views
 from django.conf import global_settings
 from . import views
 
+
+from django.contrib.sitemaps import GenericSitemap
+from django.contrib.sitemaps.views import sitemap
+from django.urls import path
+from tasker.models import Task
+
+info_dict = {
+    'queryset': Task.objects.all(),
+    'date_field': 'date_added',
+}
+
+
 urlpatterns = [
     u.path('admin/', admin.site.urls),
     u.path('task/', u.include('tasker.urls')),
@@ -28,4 +40,7 @@ urlpatterns = [
     u.path('accounts/profile/', views_auth.profile),
     u.path('now', views.now),
     u.path('email', views.email),
+    # sitemap
+    path('sitemap.xml', sitemap, {'sitemaps': {'blog': GenericSitemap(info_dict, priority=0.6)}},
+         name='django.contrib.sitemaps.views.sitemap'),
 ]

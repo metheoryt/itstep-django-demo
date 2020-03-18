@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+import logging
+
+log = logging.getLogger(__name__)
 
 # логин
 # логаут
@@ -10,6 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 
 @login_required
 def profile(request):
+    log.info('profile requested')
     return HttpResponse(f'You are {request.user.username}')
 
 

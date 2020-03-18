@@ -1,18 +1,23 @@
+from time import sleep
+
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.views.generic import ListView
-
 from .models import Task, TaskModelForm
 import logging
-
+from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required
 
 log = logging.getLogger(__name__)
 
 
+@login_required
 def create(request):
     if request.method == 'GET':
         return render(request, 'form.html', context=dict(form=TaskModelForm()))
     elif request.method == 'POST':
+        if not request.user.has_perm('tasker.add_task'):
+            return HttpResponseForbidden()
         form = TaskModelForm(request.POST)
         if form.is_valid():
             task = form.save()

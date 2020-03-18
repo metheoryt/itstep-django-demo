@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,31 +32,15 @@ ALLOWED_HOSTS = [
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    #  определения фильтров
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
-        }
-    },
     # определения форматтеров
     'formatters': {
         'verbose': {
-            'format': '{asctime} {levelname} {process:d}-{thread:d} {module}: {message}',
+            'format': '{asctime} {levelname} {process:d}-{thread:d} {name}: {message}',
             'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
+        }
     },
     # определения обработчиков логов (им назначаются фильтры и форматтеры)
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'filters': ['require_debug_false'],
-            'formatter': 'simple'
-        },
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
@@ -69,17 +52,7 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'INFO',
             'propagate': False
-        },
-        # умолчания
-        # 'django.server': {
-        #     'level': 'INFO',
-        #     'handlers': ['console'],
-        #     'propagate': False
-        # },
-        # 'django': {
-        #     'level': 'INFO',
-        #     'handlers': ['mail_admins', 'console']
-        # }
+        }
     }
 }
 
@@ -101,7 +74,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tasker',
+    'tasker.apps.TaskerConfig',
 ]
 
 MIDDLEWARE = [

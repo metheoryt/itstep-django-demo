@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_page
 from django.http import HttpResponse, HttpRequest
 from datetime import datetime
 from tasker.forms import EmailForm
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
 
 
 @cache_page(60)
@@ -20,11 +20,12 @@ def email(request: HttpRequest):
             payload = dict(
                 subject=form.cleaned_data['subject'],
                 from_email=form.cleaned_data['from_'],
-                recipient_list=[form.cleaned_data['to']]
+                recipient_list=[form.cleaned_data['to']],
+                message=form.cleaned_data['message'],
             )
             if '<' in form.cleaned_data['message']:
-                payload['html_message'] = form.cleaned_data['message']
-            else:
-                payload['message'] = form.cleaned_data['message']
+                payload['html_message'] = True
+
             send_mail(**payload)
+
         return HttpResponse('email was sent!')
