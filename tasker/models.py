@@ -32,11 +32,12 @@ class TaskModelForm(ModelForm):
 class TaskMembership(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     list = models.ForeignKey('TaskList', on_delete=models.CASCADE)
-    position = models.IntegerField()
+    position = models.IntegerField()  # позиция задания в списке
 
 
 class TaskList(models.Model):
     date_added = f.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = f.CharField(max_length=100)
     tasks = models.ManyToManyField(Task, through=TaskMembership, related_name='lists')
 
