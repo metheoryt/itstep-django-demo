@@ -1,15 +1,15 @@
 from django.core.signals import request_finished, request_started
+from django.dispatch import receiver
 import logging
-import time
 
 log = logging.getLogger(__name__)
 
 
-@request_started.connect
-def fix_time_start(sender, **kwargs):
+@receiver(request_started)
+def log_request_start(sender, **kwargs):
     log.info('request started')
 
 
-@request_finished.connect
+@receiver(request_finished)
 def log_request_finish(sender, **kwargs):
     log.info('request finished')

@@ -1,6 +1,8 @@
 from django.apps import AppConfig
-from tasker import signals
 
 
 class TaskerConfig(AppConfig):
     name = 'tasker'
+
+    def ready(self):
+        from tasker import signals
