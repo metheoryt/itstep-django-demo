@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import fields as f, ForeignKey
+from django.db.models import fields as f
 from django.forms import ModelForm
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -26,20 +26,4 @@ class Task(models.Model):
 class TaskModelForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['text', 'user']
-
-
-class TaskMembership(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    list = models.ForeignKey('TaskList', on_delete=models.CASCADE)
-    position = models.IntegerField()  # позиция задания в списке
-
-
-class TaskList(models.Model):
-    date_added = f.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = f.CharField(max_length=100)
-    tasks = models.ManyToManyField(Task, through=TaskMembership, related_name='lists')
-
-    def __str__(self):
-        return self.name
+        fields = ['text']

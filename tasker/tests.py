@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 class TestTask(TestCase):
 
     def setUp(self):
-        self.user: User = User.objects.create_user('me', password='lol')
         self.superuser: User = User.objects.create_superuser('su', password='123')
-        self.task: Task = Task.objects.create(text='todo 1', user=self.user)
+        self.user: User = User.objects.create_user('me', password='lol')
+        self.task: Task = Task.objects.create(text='todo 1', user=self.user, list=self.user_list)
 
     def test_task_show_view(self):
         rv = self.client.get('/task/1')
