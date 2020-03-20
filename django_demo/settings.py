@@ -18,16 +18,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-with open(os.path.join(BASE_DIR, 'django_demo', 'secret-key')) as f:
-    SECRET_KEY = f.read()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG') == '1'
 
-ALLOWED_HOSTS = [
-    'localhost', '127.0.0.1'
-]
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'mo-bamba' if DEBUG else os.environ['SECRET_KEY']
+
+
+ALLOWED_HOSTS = []
 
 
 LOGGING = {
@@ -173,3 +172,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+import django_heroku
+django_heroku.settings(locals())
